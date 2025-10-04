@@ -5,7 +5,7 @@ import {todoListState} from "../todoAtom";
 
 export function TodoItemCreator() {
     const [inputValue, setInputValue] = useState('');
-    const setTodoList = useSetRecoilState(todoListState);
+    const setTodoList = useSetRecoilState(todoListState); //setter 얻기
 
     const addItem = () => {
         setTodoList((oldTodoList) => [
