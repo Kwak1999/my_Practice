@@ -1,7 +1,29 @@
 /* App.css */
-.container {
-    background-color: lightblue;
+.card-container {
+    justify-content: center; /* 가로 중앙 정렬 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
     color: darkblue;
     font-family: Arial, sans-serif;
     font-size: 18px;
+    box-sizing: border-box;    /* 패딩 포함 크기 계산(권장) */
+}
+
+.top-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.notice-wrap{
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+
 }

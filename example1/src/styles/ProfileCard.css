@@ -1,52 +1,51 @@
-/* 카드 컨테이너 */
-.ProfileCard {
-    /* 가운데 정렬 + 세로 배치 */
-    display: flex; /* inline-block → flex 로 변경 */
-    flex-direction: column; /* 위→아래 배치 */
-    align-items: center; /* 가로 중앙 */
-    justify-content: center; /* 세로 중앙 (고정 높이가 있을 때 유효) */
+.profile-card {
+    background-color: #f0f0f0;
+    /* 가운데 정렬 세로배치 */
+    display: flex;              /* inline-block -> flex로 변경 */
+    flex-direction: column;     /* 위 -> 아래 배치 */
+    align-items: center;        /* 가로 중앙 */
+    justify-content: center;    /* 세로 중앙 (고정 높이가 있을 때 유효 */
 
-
-    /* 크기/여백 */
-    width: 260px; /* 카드 가로폭을 정해 안정감 부여 */
-    margin: 20px auto; /* 화면 가운데 배치 */
-    padding: 16px; /* 내부 여백으로 숨 쉬게 하기 */
-
+/*    크기 여백 */
+    width: 260px;
+    margin: 20px;          /* 화면 가운데 배치 */
+    padding: 16px;              /* 내부 여백으로 숨 쉬게 하기 */
 
     /* 테두리/모서리 */
-    border: 5px solid #61dafb; /* React 블루 톤 유지 */
-    border-radius: 16px; /* 둥근 모서리 */
+    border: 5px solid #61dafb;
+    border-radius: 12px;
 
-
-    /* 시각적 깊이(선택) */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    background: #fff; /* 대비 개선 */
+    /* 전체 폰트 스타일 */
+    font-family: Noto Sans KR, sans-serif;
 }
 
-
-/* 타이포 계층 */
-.ProfileCard h1 {
-    margin: 0 0 8px; /* 아래쪽으로만 간격 */
-    color: #fff; /* 배경 위에서 대비 확보 */
-    background-color: #4fbde6; /* 지나치게 밝은 #61dafb보다 약간 톤다운 */
-    font-family: Arial, sans-serif;
-    font-size: 1.25rem; /* 모바일에서도 과하지 않게 */
-    line-height: 1.2;
-    padding: 8px 12px; /* 배경 라벨처럼 보이도록 패딩 */
-    border-radius: 8px;
-}
-
-
-.ProfileCard h2 {
+.name{
+    color: #007BFF;
     margin: 0 0 8px;
-    font-size: 1rem; /* h1보다 한 단계 작게 */
-    color: #222;
 }
 
+.context{
+    color: #333333;
+    font-size: 18px;
+    margin: 0 0 6px;
+}
 
-/* 본문 문장 */
-.ProfileCard p {
-    margin: 0 0 6px; /* 요소 간격 균형 */
-    font-size: 0.95rem; /* 모바일 가독성을 고려한 기본 크기 */
-    color: #444;
+.description{
+    margin: 0 0 8px;
+    color: gray;
+    font-size: 16px;
+}
+
+/* 모바일 구간: 세로로 쌓기 + 카드 폭 확장 */
+@media (max-width: 600px) {
+    .top-section {
+        flex-direction: column;  /* 세로 전환 */
+        align-items: center;     /* 세로일 때 가로 중앙정렬 */
+    }
+
+    /* ProfileCard.css의 width를 안전하게 덮어쓰기(선택자 구체화) */
+    .card-container .profile-card {
+        width: 80%;
+        max-width: 360px;
+    }
 }

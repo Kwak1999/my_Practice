@@ -1,0 +1,35 @@
+.notice-card {
+    /* 왼쪽 색 띠 + 내부 여백 */
+    border-left: 6px solid var(--accent);
+    padding: 16px;                   /* 카드 내부 여백 */
+    background: #ffffff;
+    width: 280px;                    /* 기본 폭 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0 10px 10px;
+}
+
+.notice-title {
+    font-size: 20px;
+    color: #111;
+    margin: 0 0 8px 0;               /* 제목과 본문 간 바깥 여백 */
+}
+
+.notice-message {
+    font-size: 16px;
+    color: #444;
+    margin: 0;                       /* 본문 기본 마진 제거 */
+}
+
+@media (max-width: 600px) {
+    .notice-wrap {
+        flex-direction: column;  /* 세로 전환 */
+        align-items: center;     /* 세로에서 가로 중앙 */
+    }
+
+    .notice-wrap .notice-card {
+        width: 85%;              /* 고정폭 → 가변폭으로 덮어쓰기 */
+        max-width: 420px;
+    }
+}

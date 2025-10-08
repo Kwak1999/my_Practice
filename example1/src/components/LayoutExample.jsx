@@ -1,15 +1,13 @@
 import React from 'react';
-import '../styles/ProfileCard.css'
 
-
-const ProfileCard = () => {
+const LayoutExample = () => {
     return (
         <div className="profile-card">
-            <h1 className="name">곽희범</h1>
+            <h1 className="name">이름</h1>
             <p className="description">좋아하는 색상: 파랑</p>
             <p className="context">자기소개: </p>
         </div>
     );
 };
 
-export default ProfileCard;
+export default LayoutExample;

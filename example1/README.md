@@ -198,9 +198,244 @@ export default App;
 * [ ] 반응형(모바일/태블릿)
 * [ ] Tailwind 심화 (모든 과제 완료 후)
 
----
+
 
 ## 📌 메모
 
 * 오늘은 **레이아웃과 타이포 기본기**에 집중했습니다. 다음 단계부터는 **반응형**과 **사용자 인터랙션**(버튼/호버)을 추가해 실제 카드다운 완성도를 높일 예정입니다.
+
+---
+
+
+</details>
+
+# Day2
+
+<details>
+# React 레이아웃 기초 복습 (Day 2)
+
+오늘 진행한 내용을 **readme.md**로 정리했습니다. 복습하거나 다음 단계로 넘어갈 때 참고하세요.
+
+---
+
+## 1) 오늘 만든 것
+
+* **ProfileCard**: 이름, 좋아하는 색상, 자기소개를 가진 카드 UI
+* **두 개 카드 가로 정렬 + 모바일 세로 전환**: `flexbox`와 `@media`로 반응형 레이아웃 기초 구현
+* **NoticeCard 예제(유사 난이도)**: 컨테이너/카드 역할 분리 연습
+
+**작업 파일**
+
+```
+src/
+ ┣ components/
+ ┃ ┣ LayoutExample.jsx
+ ┃ ┣ NoticeCard.jsx
+ ┃ ┗ ProfileCard.jsx
+ ┣ styles/
+ ┃ ┣ NoticeCard.css
+ ┃ ┗ ProfileCard.css
+ ┣ App.jsx
+ ┣ App.css
+ ┣ index.css
+ ┗ main.jsx
+
+```
+
+---
+
+## 2) 핵심 개념 요약
+
+### A. margin vs padding (가장 많이 헷갈리는 부분)
+
+| 속성        | 의미        | 어디에 적용되나               | 언제 쓰나            |
+| --------- | --------- | ---------------------- | ---------------- |
+| `padding` | **안쪽 여백** | 테두리 **안**에서 콘텐츠와의 거리   | 카드 내부에 여유 공간 만들기 |
+| `margin`  | **바깥 여백** | 요소 **바깥**에서 다른 요소와의 거리 | 요소 사이 간격/바깥쪽 띄우기 |
+
+> 요즘 레이아웃에서는 **형제 간 간격**은 부모 컨테이너의 `gap`으로 관리하는 게 깔끔합니다. 개별 요소에는 꼭 필요할 때만 `margin`을 씁니다.
+
+### B. Flexbox로 가로 정렬
+
+```css
+.card-container {
+  display: flex;              /* 가로 배치 (기본 방향: row) */
+  justify-content: center;    /* 메인축(가로) 정렬: 가운데 */
+  align-items: center;        /* 교차축(세로) 정렬 */
+  gap: 20px;                  /* 카드 사이 간격 */
+  padding: 20px;              /* 컨테이너 내부 여백 */
+}
+```
+
+* `justify-content`: 가로 방향 정렬(기본 row일 때)
+* `align-items`: 세로 방향 정렬(기본 row일 때)
+* `gap`: 형제 요소 간 간격 (이제는 `margin`보다 선호)
+
+### C. 반응형 기초 (@media)
+
+```css
+@media (max-width: 600px) {
+  .card-container {
+    flex-direction: column;  /* 세로로 전환 */
+    align-items: center;     /* 세로 배치에서 가로 중앙 */
+  }
+
+  .card-container .profile-card {
+    width: 80%;
+    max-width: 360px;        /* 너무 넓어지는 것 방지 */
+    margin: 12px 0;          /* 위아래 간격 */
+  }
+}
+```
+
+* 넓은 화면: 가로 나란히
+* 좁은 화면(600px 이하): 세로로 쌓기 + 카드 폭 가변화
+
+### D. 왜 카드가 양끝으로 벌어졌나?
+
+* 원인: `.profile-card { margin: 20px auto; }`
+* `display:flex` 컨테이너에서 **자식의 `margin-left/right: auto`**는 남는 공간을 **스스로 차지하면서 서로 밀어냄** → 양끝으로 벌어짐
+* 해결: `margin: 20px`(auto 제거) + 컨테이너에서 `gap`/`justify-content`로 정렬/간격 관리
+
+### E. 전역 CSS vs CSS Modules
+
+* 일반 `*.css`는 **전역 적용**: 동일한 클래스명이면 **어느 컴포넌트든** 스타일이 먹음
+* 충돌 방지법
+
+    1. **클래스명 접두사**로 구분 (예: `.pc-`, `.le-`)
+    2. **CSS Modules** 사용 (`*.module.css`)
+
+       ```jsx
+       import styles from './ProfileCard.module.css';
+       <div className={styles.profileCard}>...</div>
+       ```
+
+### F. 오늘 사용한 핵심 CSS 속성 상세
+
+#### 1) `display`
+
+* **무엇?** 요소의 박스가 레이아웃에 참여하는 **방식**을 결정합니다. 이번 과제에서 핵심은 부모 컨테이너에 `display: flex`를 주어 **플렉스 컨텍스트**를 만드는 것이었어요.
+* **주요 값들(이번 학습에 유용한 것들만):**
+
+    * `block`: 줄을 바꾸고 가로 폭을 가능한 한 **꽉** 채웁니다(`div`의 기본).
+    * `inline`: 줄을 **바꾸지 않음**. `width/height`를 직접 지정하기 어렵고, 상하 `margin`이 잘 적용되지 않음(`span`의 기본).
+    * `inline-block`: 줄을 바꾸지 않지만 **크기 지정 가능**.
+    * `flex`: 자식들을 **flex item**으로 만들어 가로/세로 **정렬과 간격 제어**가 쉬워짐.
+    * `none`: 레이아웃에서 완전히 제거(보이지 않음, 공간도 차지 안 함).
+* **자주 하는 실수:** 자식에 `display:flex`를 주고 **부모에는 안 주는 경우** → 정렬이 안 먹습니다. **정렬은 부모가 담당**한다는 원칙 기억!
+
+#### 2) `flex-direction`
+
+* **무엇?** 플렉스의 **메인축 방향**을 정합니다. 메인축이 바뀌면 `justify-content`/`align-items`가 작동하는 **축**도 바뀝니다.
+* **값:**
+
+    * `row`(기본): 가로(좌→우). 메인축=가로, 교차축=세로.
+    * `row-reverse`: 가로(우→좌).
+    * `column`: 세로(위→아래). 메인축=세로, 교차축=가로.
+    * `column-reverse`: 세로(아래→위).
+* **팁:** 반응형에서 **가로(row) → 세로(column)** 로 전환하여 카드들이 **위아래로 쌓이게** 합니다.
+
+#### 3) `justify-content` (메인축 정렬)
+
+* **무엇?** **메인축 방향**(→ `flex-direction`에 의해 결정)에 따라 아이템들을 어떻게 배치할지 결정합니다.
+* **주요 값:**
+
+    * `flex-start`(기본): 시작점에 붙임
+    * `center`: 가운데 모음
+    * `flex-end`: 끝점에 붙임
+    * `space-between`: **양끝 고정 +** 나머지 아이템 사이 간격을 **균등 분배**
+    * `space-around`: 아이템 **양쪽에 동일 간격**, 바깥 여백은 절반 정도로 보임
+    * `space-evenly`: 바깥 포함 **모든 간격이 동일**
+* **팁:** `gap`과 함께 쓰면 **카드 사이 간격은 `gap`**, 전체 묶음의 위치는 `justify-content`로 결정.
+* **주의:** `flex-direction: column`일 때는 **세로 방향 정렬**이 됩니다(가로가 아님).
+
+#### 4) `align-items` (교차축 정렬)
+
+* **무엇?** **교차축(메인축과 직각)** 방향 정렬.
+* **주요 값:**
+
+    * `stretch`(기본): 가능한 높이/너비로 늘림(크기 미지정 시)
+    * `flex-start`: 교차축 시작점 정렬
+    * `center`: 교차축 가운데 정렬
+    * `flex-end`: 교차축 끝점 정렬
+    * `baseline`: 텍스트 기준선 맞춤(제목 높이가 다를 때 유용)
+* **팁:** 한 줄 배치에서 세로 가운데 정렬을 하고 싶다면(메인축이 가로, 즉 `row`), `align-items: center`.
+* **주의:** 여러 줄(`flex-wrap`)로 감쌀 때 **줄 사이 정렬**은 `align-content`가 담당합니다(혼동 주의).
+
+#### 5) 축 개념 한 번에 정리
+
+```css
+/* 가로 배치(기본) */
+.parent { display:flex; flex-direction: row; /* 메인축=가로 */
+  justify-content: center; /* 가로(메인) 가운데 */
+  align-items: center;      /* 세로(교차) 가운데 */ }
+
+/* 세로 배치(모바일 전환) */
+.parent { display:flex; flex-direction: column; /* 메인축=세로 */
+  justify-content: flex-start; /* 세로(메인) 위쪽부터 쌓기 */
+  align-items: center;         /* 가로(교차) 가운데 */ }
+```
+
+* **기억 공식**: `flex-direction`이 **무엇**이냐에 따라, `justify-content`는 **그 방향**, `align-items`는 **직각 방향**을 정렬합니다.
+* **높이 관련 팁:** 교차축 가운데 정렬(`align-items:center`)이 **세로 중앙**처럼 보이게 하려면 컨테이너가 그만큼의 **높이**를 가지고 있어야 합니다(예: `min-height: 60vh`).
+
+---
+
+## 3) 오늘의 베스트 프랙티스
+
+* **정렬은 부모가 담당**: `justify-content`, `align-items`
+* **간격은 `gap`으로**: 형제 간 간격을 일관되게 관리
+* **고정폭은 최소화**: 반응형에서 `width: 80% + max-width` 패턴 활용
+* **모바일 덮어쓰기 시 선택자 구체화**: `.card-container .profile-card { ... }`
+* **역할 분리**: 컨테이너 스타일은 `App.css`, 카드 내부 스타일은 각 컴포넌트 CSS
+
+---
+
+## 4) 미니 치트시트
+
+```css
+/* 1) 가로 두 칸 + 중앙 정렬 */
+.parent { display:flex; justify-content:center; gap:20px; }
+
+/* 2) 모바일 전환 */
+@media (max-width:600px){
+  .parent{ flex-direction:column; align-items:center; }
+  .parent .child{ width:80%; max-width:360px; }
+}
+
+/* 3) 카드 내부 여백과 시각적 개선 */
+.child{ padding:16px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,.08); }
+```
+
+---
+
+## 5) 오늘 해결한 이슈 & 교훈
+
+* **문제**: 카드가 화면 양끝으로 벌어짐
+* **원인**: `.profile-card { margin: 20px auto; }` (auto가 flex에서 밀어냄)
+* **해결**: auto 제거, 컨테이너에서 `gap`/`justify-content`로 제어
+* **교훈**: 레이아웃은 **부모 컨테이너 주도**, 자식은 내용과 내부 여백 중심으로 설계
+
+---
+
+## 6) 다음 단계(예고)
+
+* **3단계**: 카드 3개 이상 그리드 느낌으로 배치하기(가로 스크롤/랩핑) + 태블릿(768px), 모바일(480~600px) 별 브레이크포인트 확장
+* 최종 심화: **Tailwind CSS**로 동일 레이아웃 빠르게 재구현
+
+---
+
+## 7) 체크리스트
+
+* [ ] 컨테이너에 `display:flex`와 `gap`을 적용했다
+* [ ] 정렬은 `justify-content/align-items`로 했다
+* [ ] 자식에 `margin: auto`로 정렬을 시도하지 않는다
+* [ ] 모바일 전환 시 `flex-direction: column`을 적용했다
+* [ ] 카드 폭을 `% + max-width`로 유연하게 했다
+* [ ] 전역 CSS 충돌을 피하기 위해 네이밍 또는 CSS Modules를 검토했다
+
+---
+
+필요하면 이 README에 스크린샷/코드 스니펫을 계속 추가해가며 성장 로그로 쓰세요! 🚀
+
 </details>

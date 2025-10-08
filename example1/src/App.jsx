@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css';
-import ProfileCard from './components/ProfileCard.jsx';
+import ProfileCard from "./components/ProfileCard.jsx";
+import LayoutExample from "./components/LayoutExample.jsx";
+import NoticeCard from "./components/NoticeCard.jsx";
 
 
 // 앱 루트: 데모용 문구 + ProfileCard 출력
@@ -9,16 +11,25 @@ function App() {
 
 
     return (
-        <>
-            <div className="container">
-                <h1>Hello React!</h1>
-                <p>This is my first styled component.</p>
+        <div className="card-container">
+            <div className="top-section">
+                <ProfileCard />
+                <LayoutExample />
             </div>
+            <div className="notice-wrap">
+                <NoticeCard
+                    title="서비스 점검 안내"
+                    message="10월 12일(일) 02:00~04:00 점검 예정입니다."
+                    accent="#FF7A00"
+                />
+                <NoticeCard
+                    title="신규 기능 출시"
+                    message="프로필 커버 이미지를 설정할 수 있어요."
+                    accent="#2ECC71"
+                />
+            </div>
+        </div>
 
-
-            {/* 프로필 카드 컴포넌트 */}
-            <ProfileCard />
-        </>
     );
 }
 
