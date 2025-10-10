@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# 🎨 React 디자인 학습 기록
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🧭 학습 개요
+이 프로젝트는 **React와 CSS**를 사용해 단계적으로 레이아웃과 반응형 디자인을 익히는 과정입니다.  
+총 6단계 중 **2단계(Flexbox 기초)** 까지 완료했습니다 ✅
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 진행 단계
 
-### `npm start`
+### ✅ 1단계 — 기본 레이아웃 & 스타일링
+**학습 내용**
+- `margin`, `padding`, `font-size`, `font-family`, `background-color`, `color`
+- 간단한 카드형 컴포넌트 제작
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**결과물**
+- 색상과 글꼴을 활용한 카드 UI 구성
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+### ✅ 2단계 — Flexbox 기초 레이아웃
+**학습 목표**
+- `display: flex`로 가로/세로 정렬 이해하기
+- `justify-content`와 `align-items`로 정렬 제어
+- `flex-direction: column`으로 세로 방향 레이아웃 구성
+- `flex: 1`을 활용한 공간 분배
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**결과물**
+- 상단 `header`, 중앙 `content`, 하단 `footer`로 구성된 페이지
+- `content` 내부에 가로로 정렬된 카드 3개 배치
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📁 폴더 구조
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+src/
+├── App.js
+└── App.css
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+---
 
-### `npm run eject`
+## 💡 핵심 개념 정리
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| 속성 | 설명 |
+|------|------|
+| `display: flex` | 자식 요소를 가로로 배치하는 Flexbox 컨테이너 |
+| `justify-content` | 가로축(주축) 정렬 제어 |
+| `align-items` | 세로축(교차축) 정렬 제어 |
+| `flex-direction: column` | 요소를 세로로 배치 |
+| `flex: 1` | 남은 공간을 자동으로 채움 |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🖼️ 결과 예시
+```
++--------------------------------+
+|            HEADER              |
++--------------------------------+
+|        BOX1  BOX2  BOX3        |
++--------------------------------+
+|            FOOTER              |
++--------------------------------+
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🔮 다음 단계 예고 (3단계)
+### 🎯 Grid 레이아웃 & 반응형 디자인 기초
+**다음에 배울 내용**
+- `display: grid`, `grid-template-columns`, `gap`
+- `@media` 쿼리를 이용한 모바일 대응
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> 📘 *Tip:*  
+> 저장 후 GitHub나 VSCode에서 Markdown 미리보기(`Ctrl+Shift+V`)로 확인하면 깔끔하게 보입니다!
