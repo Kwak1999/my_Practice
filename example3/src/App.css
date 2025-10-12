@@ -1,0 +1,54 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4개의 열 */
+    gap: 20px; /* 카드 사이 간격 */
+    padding: 20px;
+    background-color: #f3f3f3;
+}
+
+.item {
+    background-color: #d1e8ff;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* 부드럽게 색 변화 */
+}
+.item:hover {
+    background-color: #333333;
+    color: white;
+}
+
+.item1{
+    background-color: #61dafb;
+}
+.item2{
+    background-color: gold;
+}
+.item3{
+    background-color: green;
+}
+.item4{
+    background-color: gray;
+}
+.item5{
+    background-color: red;
+}
+.item6{
+    background-color: pink;
+}
+
+/* 반응형 예시 (화면이 768px 이하일 때) */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 2열로 변경 */
+    }
+}
+
+/* 480px 이하일 때는 1열 */
+@media (max-width: 500px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
