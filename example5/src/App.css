@@ -1,0 +1,10 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* main이 남은 공간을 채우게 */
+.content {
+    flex: 1;
+}

@@ -1,0 +1,67 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* 다른 요소 위로 올리기 */
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav a{
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.nav a:hover {
+    color: #dfe6f2;
+    background-color: #0056b3;
+}
+
+/* 메뉴 버튼은 기본적으로 숨김 */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+/* 모바일(≤768px) */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+        flex-direction: column;
+        background-color: #0064d2;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    .nav.open {
+        display: flex; /* 버튼 클릭 시 보이게 */
+    }
+}
