@@ -59,6 +59,7 @@ const CardGrid = () => {
                     </div>
                 </div>
             </div>
+            <div className="left"> 광고 </div>
         </div>
     );
 };
