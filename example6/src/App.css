@@ -1,0 +1,41 @@
+.grid-container {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 30px;
+    background-color: #f1f1f1;
+}
+
+.item {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* 색상들 */
+.color-1 { background-color: #e74c3c; }
+.color-2 { background-color: #3498db; }
+.color-3 { background-color: #2ecc71; }
+.color-4 { background-color: #f1c40f; color: black; }
+.color-5 { background-color: orange; }
+.color-6 { background-color: purple; }
+.color-7 { background-color: #1abc9c; }
+.color-8 { background-color: #9b59b6; }
+.color-9 { background-color: #34495e; }
+.color-10 { background-color: #646cff; }
+.color-11 { background-color: pink; }
+.color-12 { background-color: gray; }
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 4열 */
+    }
+}
+
+@media(max-width: 500px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
